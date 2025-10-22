@@ -1,3 +1,9 @@
+Proyecto base para una aplicación gamificada de aprendizaje de señas (Android/iOS) creada con Flutter.
+
+Badges:
+
+- CI: GitHub Actions (flutter tests run on `test` branch)
+- License: MIT
 # Aplicación Señas (Flutter)
 
 Proyecto base para una aplicación gamificada de aprendizaje de señas (Android/iOS) creada con Flutter.
@@ -44,6 +50,20 @@ Branching sugerido
 - `test` - rama para pruebas experimentales o integraciones antes de pasar a `develo`.
 
 Si quieres, ahora creo las ramas `test` y `develo` en remoto (ya tengo acceso al repo). También puedo añadir un workflow de GitHub Actions básico que ejecute `flutter test` en pushes y PRs.
+
+Acciones añadidas en este commit:
+- Soporte inicial i18n: `lib/l10n/intl_pt.arb`, `lib/l10n/intl_en.arb` y configuración de localizations en `lib/src/app.dart`.
+- Servicio `ModelManager` en `lib/src/services/model_manager.dart` para descargar y guardar modelos TFLite por locale.
+- Especificación mínima OpenAPI en `docs/api/content_api.yaml`.
+- Workflow de CI en `.github/workflows/flutter_ci.yml` que ejecuta `flutter test` en pushes/PRs.
+
+Backend recomendado (resumen):
+- Mantén el backend como un proyecto separado (otro repositorio). Esto facilita despliegues independientes, escalado y control de acceso (CDN, storage, API). Usa Postgres o Firestore para metadatos y S3/GCS + CDN para assets/modelos.
+
+Dónde poner los modelos y cómo la app valida:
+- Modelos (.tflite) y vídeos deben almacenarse en cloud storage (S3/GCS) y servirse por CDN. El backend expone metadatos (URL, versión, checksum).
+- La app usa `ModelManager` para descargar el modelo y verifica checksum/version. Carga el archivo localmente para inferencia con `tflite_flutter` o `tflite`.
+
 
 "Try it":
 1. Abrir terminal en `aplicacion_senas`.
