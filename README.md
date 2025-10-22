@@ -19,6 +19,32 @@ Siguientes pasos sugeridos:
 3. Añadir detección de manos (MediaPipe / tflite) y lógica de scoring.
 4. Diseñar el sistema de gamificación (XP, monedas, logros) y persistencia con Hive.
 
+Explicación rápida: ¿por qué ejecutar `flutter test` en cada push/PR?
+
+- `flutter test` ejecuta los tests unitarios y de widgets del proyecto automáticamente en CI. Esto ayuda a detectar roturas de funcionalidad antes de fusionar cambios (errores en lógica, regresiones en UI, dependencias rotas).
+- Beneficios:
+	- Detectar bugs tempranamente.
+	- Mantener la calidad de código en PRs grandes o pequeños.
+	- Automatizar verificación básica antes de deploy.
+
+Arquitectura propuesta (carpetas principales)
+- `lib/src/ui` - pantallas y widgets.
+- `lib/src/features` - features concretas (ej. `lessons`, `profile`, `shop`).
+- `lib/src/domain` - modelos y casos de uso.
+- `lib/src/data` - repositorios, fuentes de datos locales/remotas.
+- `lib/src/state` - providers y lógica de estado (Riverpod).
+- `lib/src/services` - servicios platform (camera, ml, storage).
+- `assets/` - imágenes, videos, modelos.
+
+He creado skeletons iniciales para `domain`, `data`, `state`, `features/lessons` y un `assets/.gitkeep`.
+
+Branching sugerido
+- `main` - rama estable y deployable.
+- `develo` - rama de desarrollo (merge PRs desde feature branches).
+- `test` - rama para pruebas experimentales o integraciones antes de pasar a `develo`.
+
+Si quieres, ahora creo las ramas `test` y `develo` en remoto (ya tengo acceso al repo). También puedo añadir un workflow de GitHub Actions básico que ejecute `flutter test` en pushes y PRs.
+
 "Try it":
 1. Abrir terminal en `aplicacion_senas`.
 2. Ejecutar `flutter run` para lanzar la app en un emulador o dispositivo.
