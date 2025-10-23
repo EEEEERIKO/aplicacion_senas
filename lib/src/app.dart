@@ -4,6 +4,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'ui/screens/onboarding_screen.dart';
 import 'ui/screens/home_screen.dart';
 import 'ui/screens/profile_screen.dart';
+import 'ui/screens/login_screen.dart';
+import 'ui/screens/register_screen.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -11,16 +13,18 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final GoRouter router = GoRouter(
-      initialLocation: '/',
+      initialLocation: '/login',
       routes: [
         GoRoute(path: '/', builder: (context, state) => const OnboardingScreen()),
+        GoRoute(path: '/login', builder: (context, state) => const LoginScreen()),
+  GoRoute(path: '/register', builder: (context, state) => const RegisterScreen()),
         GoRoute(path: '/home', builder: (context, state) => const HomeScreen()),
         GoRoute(path: '/profile', builder: (context, state) => const ProfileScreen()),
       ],
     );
 
     return MaterialApp.router(
-      title: 'Aplicación Señas',
+  title: 'Signoise',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
         useMaterial3: true,
