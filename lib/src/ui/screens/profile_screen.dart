@@ -30,7 +30,7 @@ class ProfileScreen extends ConsumerWidget {
           )
         ],
       ),
-      body: asyncUser.when(
+  body: asyncUser.when(
         data: (user) => SingleChildScrollView(
           padding: const EdgeInsets.all(16),
           child: Column(
@@ -104,6 +104,7 @@ class ProfileScreen extends ConsumerWidget {
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, st) => Center(child: Text('Erro: $e')),
       ),
+      
     );
   }
 
